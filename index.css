@@ -1,0 +1,268 @@
+html {
+  box-sizing: border-box;
+  line-height: 1.5;
+  letter-spacing: 0.1em;
+  font-family: 'Lato', sans-serif;
+}
+
+body {
+  max-width: 1920px;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 0 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  --red: rgb(238, 77, 77);
+  --green: rgb(25, 160, 66);
+  --light: #f5f5fa;
+  --dark-gray: rgb(49, 49, 49);
+  --gray: #32343596;
+
+  background: var(--light);
+  color: var(--dark-gray);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: 0.3s;
+}
+
+a:hover {
+  color: var(--key-color);
+}
+
+a:active {
+  opacity: 0.5;
+  transition: 0.02s;
+}
+
+button,
+input,
+textarea,
+label {
+  cursor: pointer;
+  font-size: inherit;
+  font-family: inherit;
+  letter-spacing: inherit;
+}
+
+/* -------------------------------------------- */
+/* COMMON STYLES */
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.2em;
+  border: 0.1em solid var(--dark-gray);
+  background-color: var(--light);
+  transition: 0.3s;
+}
+
+.btn:hover,
+.btn:focus {
+  color: var(--light);
+  background: var(--dark-gray);
+}
+
+.task {
+  margin: 1em 0;
+  padding: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 0.1em solid var(--gray);
+  border-radius: 0.2em;
+  background-color: var(--dark-gray);
+  color: var(--light);
+  transition: .3s;
+  animation: show .6s both;
+}
+
+@keyframes show {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.task.complete {
+  background-color: var(--green);
+  border-color: var(--green);
+}
+
+.fake-checkbox {
+  position: relative;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: .2em;
+  background-color: var(--light);
+}
+
+.fake-checkbox::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: inherit;
+  background-color: transparent;
+  transition: .3s;
+}
+
+.task__checkbox-complete:checked + .fake-checkbox::before {
+  content: "✔";
+  color: var(--green);
+}
+
+.task__number {
+  margin: 0 .5em 0 1em;
+  padding-right: .4em;
+}
+
+.task__description {
+  cursor: default;
+  flex: 1;
+  margin-right: .6em;
+  padding: .4em;
+  font-size: 1.2em;
+  background-color: transparent;
+  border: none;
+  border-radius: inherit;
+  box-shadow: inset 0 0 .1em var(--light);
+  color: inherit;
+}
+
+.task__btn-delete {
+  width: 2em;
+  height: 2em;
+  padding: 0;
+  border-color: transparent;
+  background-color: transparent;
+  color: inherit;
+}
+
+.task__btn-delete:hover {
+  background-color: var(--red);
+  border-color: var(--red);
+}
+
+/* -------------------------------------------- */
+
+.header {
+  width: 100%;
+  margin-bottom: 2em;
+  border-bottom: 0.1em solid var(--gray);
+}
+
+.header__title {
+  text-align: center;
+}
+
+.main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.todo-app {
+  max-width: 40em;
+  width: 100%;
+}
+
+.todo-app__add {
+  position: relative;
+  height: 4em;
+  overflow: hidden;
+}
+
+.btn-create-task {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  visibility: visible;
+  opacity: 1;
+  transition: .1s;
+}
+
+.btn-create-task.hide {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.wrapper-input-task {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  opacity: 1;
+  transition: .3s;
+}
+
+.wrapper-input-task.hide {
+  opacity: 0;
+}
+
+.input-task {
+  flex: 1;
+  padding: 1em;
+  border-radius: .2em 0 0 .2em;
+  border: 0.1em solid var(--gray);
+  border-right: none;
+  transition: .3s;
+}
+
+.input-task.void {
+  border-color: var(--red);
+}
+
+.input-task:hover,
+.input-task:focus {
+  border-color: var(--dark-gray);
+}
+
+.btn-add-task {
+  padding: 1em;
+  border-radius: 0 .2em .2em 0;
+}
+
+.footer {
+  width: 100%;
+  margin-top: 2em;
+  border-top: 0.1em solid var(--gray);
+}
+
+.footer__description {
+  text-align: center;
+  color: var(--gray);
+}

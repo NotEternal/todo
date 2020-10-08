@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="index.css" />
+  </head>
+
+  <body>
+    <header class="header">
+      <h1 class="header__title">TODO LIST</h1>
+    </header>
+
+    <main class="main">
+      <section class="todo-app">
+        <div class="todo-app__add">
+          <button class="btn-create-task btn">CREATE TASK</button>
+          
+          <div class="wrapper-input-task hide">
+            <input type="text" placeholder="Write your task" class="input-task" />
+            <button class="btn-add-task btn">ADD</button>
+          </div>
+        </div>
+
+        <ul class="todo-app__list"></ul>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p class="footer__description">
+        Simple list tasks. One of a bunch of others.
+      </p>
+    </footer>
+
+    <script src="index.js"></script>
+  </body>
+</html>
