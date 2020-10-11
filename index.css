@@ -223,13 +223,13 @@ label {
   left: 0;
   transform: translateY(50%);
   height: .1em;
-  width: 100%;
+  width: 0;
   background-color: var(--light);
   transition: inherit;
 }
 
 #visible-complete-task:checked + .fake-complete-task-checkbox::before {
-  width: 0;
+  width: 100%;
 }
 
 .todo-app {
