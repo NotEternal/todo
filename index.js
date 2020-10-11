@@ -9,6 +9,7 @@ const inputTask = document.querySelector('.input-task');
 btnCreateTask.onclick = () => {
   btnCreateTask.classList.add('hide');
   wrapperInputTask.classList.remove('hide');
+  inputTask.focus();
 };
 
 btnAddTask.onclick = () => {
@@ -41,14 +42,15 @@ function checkUserInput() {
 }
 
 const listTasks = document.querySelector('.todo-app__list');
+let tasksCounter = 0;
 
 function addTaskToList({ description }) {
-  const number = listTasks.childNodes.length + 1;
+  tasksCounter += 1;
+
   const li = document.createElement('li');
   const taskContent = `
-    <input type="checkbox" id="checkbox-complete-task-${number}" class="task__checkbox-complete" hidden/>
-    <label for="checkbox-complete-task-${number}" class="fake-checkbox"></label>
-    <span class="task__number">${number}</span>
+    <input type="checkbox" id="checkbox-complete-task-${tasksCounter}" class="task__checkbox-complete" hidden/>
+    <label for="checkbox-complete-task-${tasksCounter}" class="fake-checkbox"></label>
     <input class="task__description" value=${description} disabled />
     <button class="task__btn-delete btn">&times;</button>
   `;
@@ -62,23 +64,46 @@ function addTaskToList({ description }) {
 listTasks.addEventListener('click', (event) => {
   if (event.target.classList.contains('task__btn-delete')) {
     event.target.parentNode.remove();
-    updateNumbersTask();
   } else if (event.target.classList.contains('task__checkbox-complete')) {
-    event.target.checked
-      ? event.target.parentNode.classList.add('complete')
-      : event.target.parentNode.classList.remove('complete');
+    if (event.target.checked) {
+      event.target.parentNode.classList.add('complete');
+      addToCompleteList(event.target.parentNode);
+    } else {
+      event.target.parentNode.classList.remove('complete');
+      removeFromCompleteList(event.target.parentNode);
+    }
   }
 });
 
-function updateNumbersTask() {
-  for (let i = 0; i < listTasks.childNodes.length; i += 1) {
-    listTasks.childNodes[i].querySelector(
-      'input[type=checkbox]'
-    ).id = `checkbox-complete-task-${i + 1}`;
-    listTasks.childNodes[i].querySelector(
-      '.fake-checkbox'
-    ).for = `checkbox-complete-task-${i + 1}`;
+const completeList = document.querySelector('.complete-section');
 
-    listTasks.childNodes[i].querySelector('.task__number').textContent = i + 1;
+function addToCompleteList(task) {
+  const li = document.createElement('li');
+  const input = document.createElement('input');
+
+  input.setAttribute('disabled', '');
+  input.value = task.querySelector('.task__description').value;
+  input.style.padding = '.4em';
+  input.style.border = 'none';
+  input.style.cursor = 'default';
+  input.style.backgroundColor = 'transparent';
+  input.style.color = 'var(--light)';
+  li.appendChild(input);
+  completeList.appendChild(li);
+}
+
+function removeFromCompleteList(task) {
+  const completeTasks = completeList.querySelectorAll('li input');
+
+  for (let completeTask of completeTasks) {
+    if (completeTask.value === task.querySelector('.task__description').value) {
+      completeTask.parentNode.remove();
+    }
   }
 }
+
+const toggleCompleteList = document.querySelector('#visible-complete-task');
+
+toggleCompleteList.onclick = () => {
+  completeList.classList.toggle('visible');
+};
